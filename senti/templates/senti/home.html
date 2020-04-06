@@ -1,0 +1,82 @@
+{% extends "senti/base.html" %}
+{% block content %}
+    <form name="search_body" class="search-box text-center" method="get" >
+        <input name="q" class="text-black font-weight-light" type="text" placeholder="Search..." onblur="document.search_nav.q.value = this.value"/>
+    </form>
+    <h1 class="mt-5 text-white font-weight-light text-center">Tweet Sentiment Analyzer {{ search }}</h1>
+    <p class="lead text-white-50 text-center">A Place where you can read tweets with moods.</p>
+    <h1 class="mt-5 text-white font-weight-light text-center">Happy</h1>
+    <div class="container-fluid">
+    <div class="row">
+    {% for tweet in happy %}
+        <article class="content-section-home col">
+            <img class="rounded-circle article-img" src="{{ tweet.propic_url }}" style="float: left">
+            <div class="media-body">
+                <div class="article-metadata">
+                    {% if tweet.type == 11 %}
+                        <h6 class="article-retweeted">@{{ tweet.r_username }} retweeted</h6>
+                    {% endif %}
+                    <h5 class="mr-2">{{ tweet.name }}</h5>
+                    <small class="article-small">{{ tweet.date_rem }}</small>
+                    <h6 class="mr-2">@{{ tweet.username }}</h6>
+                </div>
+                <div class="article-main">
+                    <p class="article-content">{{ tweet.text }}</p>
+                    {% if tweet.image_url != None %}
+                        <img class="article-image" src="{{ tweet.image_url }}"> 
+                    {% endif %}
+                </div>
+            </div>
+            <div class="article-foot">
+                <div class="article-socialdata">
+                    <h6>{{ tweet.likes }} likes {{ tweet.retweet }} retweets</h6>   
+                </div>
+                <div class="article-emo">😀100% </div>
+                <div class="article-emo">😮100% </div>
+                <div class="article-emo">😂100% </div>
+                <div class="article-emo">😥100% </div>
+                <div class="article-emo">😩100% </div>
+                <div class="article-emo">😡100% </div>
+            </div>
+        </article>
+    {% endfor %}
+    </div>
+    </div>
+    <h1 class="mt-5 text-white font-weight-light text-center">Sad</h1>
+    {% for tweet in sad %}
+        <article class="media content-section" data-aos="slide-up" data-aos-once="true" data-aos-duration="250" data-aos-offset="50">
+            <img class="rounded-circle article-img" src="{{ tweet.propic_url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    {% if tweet.type == 11 %}
+                        <h6 class="article-retweeted">@{{ tweet.r_username }} retweeted</h6>
+                    {% endif %}
+                    <h5 class="mr-2">{{ tweet.name }}</h5>
+                    <small class="article-small">{{ tweet.date_rem }}</small>
+                    <h6 class="mr-2">@{{ tweet.username }}</h6>
+                </div>
+                <div class="article-main">
+                    <p class="article-content">{{ tweet.text }}</p>
+                    {% if tweet.image_url != None %}
+                        <img class="article-image" src="{{ tweet.image_url }}"> 
+                    {% endif %}
+                <div>
+                <div class="article-socialdata">
+                    <h6>{{ tweet.likes }} likes {{ tweet.retweet }} retweets</h6>   
+                </div>
+                <div class="article-emo">😀 100%</div>
+                <div class="article-emo">😮 100%</div>
+                <div class="article-emo">😂 100%</div>
+                <div class="article-emo">😥 100%</div>
+                <div class="article-emo">😩 100%</div>
+                <div class="article-emo">😡 100%</div>
+            </div>
+        </article>
+    {% endfor %} 
+    <div class="container-fluid">
+        <div class="row">
+            <article class="content-section col">hello this joes i just wanted to show you this website this is nuts i am gonna kill you why dont you get out do you really like me when will it come out</article>
+            <article class="content-section col">hello this joes i just wanted to show you this website</article>
+        </div>
+    </div>
+{% endblock content %}

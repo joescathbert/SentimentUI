@@ -1,0 +1,38 @@
+{% extends "senti/base.html" %}
+{% block content %}
+    <form name="search_body" class="search-box text-center" >
+        <input name="q" class="text-black font-weight-light" type="text" value="{{ search }}" placeholder="Search..." onblur="document.search_nav.q.value = this.value"/>
+    </form>
+    <h1 class="mt-5 text-white font-weight-light text-center">Results for "{{ search }}"</h1>
+    {% for tweet in tweets %}
+        <article class="media content-section" data-aos="slide-up" data-aos-once="true" data-aos-duration="250" data-aos-offset="50">
+            <img class="rounded-circle article-img" src="{{ tweet.propic_url }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    {% if tweet.type == 11 %}
+                        <h6 class="article-retweeted">@{{ tweet.r_username }} retweeted</h6>
+                    {% endif %}
+                    <h5 class="mr-2">{{ tweet.name }}</h5>
+                    <small class="article-small">{{ tweet.date_rem }}</small>
+                    <h6 class="mr-2">@{{ tweet.username }}</h6>
+                </div>
+                <div class="article-main">
+                    <p class="article-content">{{ tweet.text }}</p>
+                    {% if tweet.image_url != None %}
+                        <img class="article-image" src="{{ tweet.image_url }}"> 
+                    {% endif %}
+                <div>
+                <div class="article-socialdata">
+                    <h6>{{ tweet.likes }} likes {{ tweet.retweet }} retweets</h6>   
+                </div>
+                <div class="article-emo">😀 100%</div>
+                <div class="article-emo">😮 100%</div>
+                <div class="article-emo">😂 100%</div>
+                <div class="article-emo">😥 100%</div>
+                <div class="article-emo">😩 100%</div>
+                <div class="article-emo">😡 100%</div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'senti/main.css' %}">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(window).on('scroll', function(){
+            if ($(window).scrollTop() > 100){
+                $('nav').addClass('black');
+                $('div a.mybrand').addClass('black');
+                $('nav form.search-box').show();
+                $('nav ul li a').addClass('black');
+            }
+            else{
+                $('nav').removeClass('black');
+                $('div a.mybrand').removeClass('black');
+                $('nav form.search-box').hide();
+                $('nav ul li a').removeClass('black');
+            }
+        })
+    </script>
+    {% if search %}
+    <title>{{ search }} - SENTI</title>
+    {% else %}
+    <title>SENTI</title>
+    {% endif %}
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-fixed-top">
+    <div class="logo">
+        <a class="mybrand" style:"color: #000" href="{% url 'senti-home' %}">SENTI</a>
+        </button>
+    </div>
+    <form name="search_nav" class="search-box" style="display:none" >
+        <input name="q" class="text-black font-weight-light" type="text" placeholder="Search..." onblur="document.search_body.q.value = this.value"/>
+    </form>
+    <ul>
+    <li><a href='{% url 'senti-home' %}' class="active">Home</a></li>
+    <li><a href='#'>Twitter</a></li>
+    <li><a href='#'>About</a></li>
+    </ul>
+    </nav>
+
+    <div class="mycontainer">
+    {% block content %}{% endblock %}  
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.js" integrity="sha256-w49DIDk8itgSjjuoof5lTxYKwcjWJ7Z2sRW3nU1StNA=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    
+    {% block javascript %}{% endblock %}
+</body>
+</html>
