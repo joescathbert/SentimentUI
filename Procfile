@@ -1,0 +1,1 @@
+web: gunicorn SentimentUI.wsgi --log-file -
