@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from urllib.parse import urlencode
 from . import twtex
+from . import pre
 
 def home(request):
     if request.GET.get('q'):
@@ -23,6 +24,8 @@ def search(request):
     search = request.GET['q']
     search_api = twtex.TwitterClient()
     tweets = search_api.get_tweets(search,10)
+    for t in tweets:
+        t['prediction'] = pre.pred(t['text'])
     context = {
         'search': search,
         'tweets': tweets
